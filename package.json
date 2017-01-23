@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/shintouki/stocks-monitor/issues"
   },
-  "homepage": "https://github.com/shintouki/stocks-monitor#readme"
+  "homepage": "https://github.com/shintouki",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.0",
+    "express-session": "^1.15.0",
+    "mongoose": "^4.7.7"
+  }
 }
