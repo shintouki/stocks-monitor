@@ -1,0 +1,20 @@
+{
+  "name": "stocks-monitor",
+  "version": "1.0.0",
+  "description": "Chart stocks",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shintouki/stocks-monitor.git"
+  },
+  "author": "Ted",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shintouki/stocks-monitor/issues"
+  },
+  "homepage": "https://github.com/shintouki/stocks-monitor#readme"
+}
