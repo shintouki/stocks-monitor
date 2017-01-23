@@ -1,8 +1,18 @@
-$(document).ready(function () {
-  // Fix active nav bar tab highlighting
-  var pathname = window.location.pathname;
-  // Find current active nav bar tab by searching for a href equal to current path.
-  var currAnchor = $('a[href="' + pathname + '"]');
-  // Set the li element above the anchor to have class active to highlight it
-  $(currAnchor).parent().addClass("active");
-});
+var appUrl = window.location.origin;
+
+$.delete = function(url, data, success, dataType) {
+ 
+  if ( $.isFunction(data) ){
+    type = type || callback;
+    callback = data;
+    data = {}
+  }
+ 
+  return $.ajax({
+    type: 'DELETE',
+    url: url,
+    data: data,
+    success: success,
+    dataType: dataType
+  });
+}
