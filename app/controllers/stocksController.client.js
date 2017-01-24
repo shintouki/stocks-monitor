@@ -1,7 +1,7 @@
 $(function () {
   var seriesOptions = [],
     seriesCounter = 0,
-    names = ['GOOG'];
+    names = ['GOOG', 'YHOO', 'FB', 'AAPL'];
 
   /**
    * Create the chart when all data is loaded
@@ -47,10 +47,10 @@ $(function () {
 
   $.each(names, function (i, name) {
 
-    $.get('/stock-search', function(data) {
+    $.get('/stock-search', { stockName: names[i] }, function(data) {
 
       var stockData = data.relevantDataArr;
-      console.log(stockData);
+      // console.log(stockData);
 
       seriesOptions[i] = {
         name: name,
@@ -60,7 +60,7 @@ $(function () {
       // As we're loading the data asynchronously, we don't know what order it will arrive. So
       // we keep a counter and create the chart when all the data is loaded.
       seriesCounter += 1;
-
+      // console.log(seriesCounter);
       if (seriesCounter === names.length) {
         console.log("creating chart...");
         createChart();
