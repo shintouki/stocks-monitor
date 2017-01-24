@@ -46,13 +46,18 @@ $(function () {
   }
 
   $.each(names, function (i, name) {
+    var today = new Date();
+    today = '"' + today.getFullYear() + '-' + today.getMonth() + 1 + '-' + today.getDate() + '"';
 
-    var stockCode = '"GOOG"';
-    // console.log(stockCode);
-    var yahooApiUrl = 'http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = ' + stockCode + ' and startDate = "2012-09-11" and endDate = "2014-02-11"&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=';
+    var stockCode = '"' + name + '"';
+    var startDate = '"2015-01-01"';
+    var endDate = today
+
+    var yahooApiUrl = 'http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = ' + stockCode + ' and startDate = ' + startDate + ' and endDate = ' + endDate + '&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=';
     $.getJSON(yahooApiUrl, function (data) {
       console.log(data);
       
+
       seriesOptions[i] = {
         name: name,
         data: data
