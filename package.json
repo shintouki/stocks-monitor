@@ -1,5 +1,5 @@
 {
-  "name": "Stocks Monitor",
+  "name": "Stocks-Monitor",
   "version": "1.0.0",
   "description": "Chart stocks",
   "main": "server.js",

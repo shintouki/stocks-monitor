@@ -9,6 +9,7 @@ html(lang="en")
   body
     .container.panel.panel-default
       .panel-body
+        #chart-container
         .input-group
           input#stock-input.form-control(type='text', placeholder='Enter stock code')
           span.input-group-btn
@@ -17,6 +18,7 @@ html(lang="en")
 
     include jquery.pug
     include bootstrap-js.pug
+    script(type='text/javascript', src='http://code.highcharts.com/stock/highstock.js')
     script(type='text/javascript', src='/common/jquery-functions.js')
     script(type='text/javascript', src='/controllers/stocksController.client.js')
     include bootstrap-css.pug
