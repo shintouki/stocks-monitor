@@ -1,4 +1,11 @@
+'use strict';
+
 $(function () {
+
+  var stockInput = $('#stock-input');
+  var addStockButton = $('#add-stock-button');
+
+
   var seriesOptions = [],
     seriesCounter = 0,
     names = ['GOOG', 'YHOO', 'FB', 'AAPL'];
@@ -69,18 +76,18 @@ $(function () {
 
   });
 
+
+  addStockButton.click(function() {
+    var stockCode = stockInput.val();
+    $.post('/add-stock', { stockCode: stockCode }, function(data) {
+      
+
+    });
+
+
+  });
+
 });
-
-
-
-
-
-// http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22GOOG%22%20and%20startDate%20%3D%20%222012-09-11%22%20and%20endDate%20%3D%20%222014-02-11%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=
-
-// http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = "GOOG" and startDate = "2016-01-01" and endDate = "2017-01-23"&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=
-
-
-// http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = "GOOG" and startDate = "2016-01-01" and endDate = "2017-01-23"&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=
 
 
 

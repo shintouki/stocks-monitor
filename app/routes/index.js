@@ -12,6 +12,9 @@ module.exports = function(app) {
       res.render('index');
     });
 
+  app.route('/add-stock')
+    .get(stockHandler.addStock);
+
   app.route('/stock-search')
     .get(stockHandler.stockSearch);
 

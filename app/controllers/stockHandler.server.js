@@ -49,6 +49,11 @@ function StockHandler() {
 
 
   }
+
+  this.addStock = function (req, res) {
+    
+  }
+
   
 }
 
