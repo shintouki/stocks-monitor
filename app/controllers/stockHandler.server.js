@@ -24,7 +24,6 @@ var appUrl = process.env.APP_URL
 function StockHandler() {
   
   this.stockSearch = function(req, res) {
-    console.log("in stock search");
     var today = new Date();
     var year = today.getFullYear();
     var month = today.getMonth() + 1;
@@ -42,8 +41,25 @@ function StockHandler() {
         console.log("Error");
       }
       else {
-        // console.log(data);
+        var details = data.dataset.name;
+        var stockPricesArr = data.dataset.data;
+        var relevantDataArr = [];
         
+        for (var i = stockPricesArr.length - 1; i >= 0; i--) {
+          var indivDate = stockPricesArr[i][0];
+          var endPrice = stockPricesArr[i][4];
+          // console.log(indivDate);
+          // console.log(endPrice);
+          relevantDataArr.push([indivDate, endPrice]);
+        }
+
+        var resObj = {
+          stockDetails: details,
+          relevantDataArr: relevantDataArr
+        };
+        // console.log(resObj);
+
+        res.json(resObj);
       }
       
     });
