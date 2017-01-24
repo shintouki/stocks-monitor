@@ -1,25 +1,9 @@
 'use strict';
 
 var Stocks = require('../models/stocks.js');
-// var $ = require('jquery');
 var getJSON = require('get-json');
 
 var appUrl = process.env.APP_URL
-
-// var getJSON = function(url, callback) {
-//     var xhr = new XMLHttpRequest();
-//     xhr.open("get", url, true);
-//     xhr.responseType = "json";
-//     xhr.onload = function() {
-//       var status = xhr.status;
-//       if (status == 200) {
-//         callback(null, xhr.response);
-//       } else {
-//         callback(status);
-//       }
-//     };
-//     xhr.send();
-// };
 
 function StockHandler() {
   
@@ -35,7 +19,7 @@ function StockHandler() {
     var apiKey = process.env.QUANDL_API_KEY
 
     var quandlApiUrl = 'https://www.quandl.com/api/v3/datasets/WIKI/' + stockCode + '.json?api_key=' + apiKey + '&start_date=' + startDate + '&end_date=' + endDate;
-    // console.log(quandlApiUrl);
+
     getJSON(quandlApiUrl, function (err, data) {
       if (err) {
         console.log("Error");
@@ -47,17 +31,16 @@ function StockHandler() {
         
         for (var i = stockPricesArr.length - 1; i >= 0; i--) {
           var indivDate = stockPricesArr[i][0];
+          var unixTime = new Date(indivDate).getTime();
           var endPrice = stockPricesArr[i][4];
-          // console.log(indivDate);
-          // console.log(endPrice);
-          relevantDataArr.push([indivDate, endPrice]);
+
+          relevantDataArr.push([unixTime, endPrice]);
         }
 
         var resObj = {
           stockDetails: details,
           relevantDataArr: relevantDataArr
         };
-        // console.log(resObj);
 
         res.json(resObj);
       }
