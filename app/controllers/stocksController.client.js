@@ -45,38 +45,28 @@ $(function () {
     });
   }
 
-  $.each(names, function (i, name) {
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = today.getMonth() + 1;
-    var day = today.getDate();
+  // $.each(names, function (i, name) {
 
-    var stockCode = name;
-    var startDate = year + '-' + month + '-' + day;
-    var endDate = year - 1 + '-' + month + '-' + day;
-    var apiKey = process.env.QUANDL_API_KEY
-    // console.log(startDate);
-    // console.log(endDate);
-    var quandlApiUrl = 'https://www.quandl.com/api/v3/datasets/WIKI/' + stockCode + '.json?api_key=' + apiKey + '&start_date=' + startDate + '&end_date=' + endDate;
-    $.getJSON(quandlApiUrl, function (data) {
-      // var quotes = data["query"];
+    $.get('/stock-search', { stockCodes: names }, function(data) {
+
       console.log(data);
-
-
-      seriesOptions[i] = {
-        name: name,
-        data: data
-      };
+      
+      // seriesOptions[i] = {
+      //   name: name,
+      //   data: data
+      // };
 
       // As we're loading the data asynchronously, we don't know what order it will arrive. So
       // we keep a counter and create the chart when all the data is loaded.
-      seriesCounter += 1;
+      // seriesCounter += 1;
 
-      if (seriesCounter === names.length) {
-        createChart();
-      }
+      // if (seriesCounter === names.length) {
+      //   createChart();
+      // }
     });
-  });
+
+  // });
+
 });
 
 
