@@ -47,16 +47,21 @@ $(function () {
 
   $.each(names, function (i, name) {
     var today = new Date();
-    today = '"' + today.getFullYear() + '-' + today.getMonth() + 1 + '-' + today.getDate() + '"';
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var day = today.getDate();
 
-    var stockCode = '"' + name + '"';
-    var startDate = '"2015-01-01"';
-    var endDate = today
-
-    var yahooApiUrl = 'http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = ' + stockCode + ' and startDate = ' + startDate + ' and endDate = ' + endDate + '&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=';
-    $.getJSON(yahooApiUrl, function (data) {
+    var stockCode = name;
+    var startDate = year + '-' + month + '-' + day;
+    var endDate = year - 1 + '-' + month + '-' + day;
+    var apiKey = process.env.QUANDL_API_KEY
+    // console.log(startDate);
+    // console.log(endDate);
+    var quandlApiUrl = 'https://www.quandl.com/api/v3/datasets/WIKI/' + stockCode + '.json?api_key=' + apiKey + '&start_date=' + startDate + '&end_date=' + endDate;
+    $.getJSON(quandlApiUrl, function (data) {
+      // var quotes = data["query"];
       console.log(data);
-      
+
 
       seriesOptions[i] = {
         name: name,
@@ -80,4 +85,11 @@ $(function () {
 
 // http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22GOOG%22%20and%20startDate%20%3D%20%222012-09-11%22%20and%20endDate%20%3D%20%222014-02-11%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=
 
-// http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = "GOOG" and startDate = "2012-09-11" and endDate = "2014-02-11"&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=
+// http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = "GOOG" and startDate = "2016-01-01" and endDate = "2017-01-23"&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=
+
+
+// http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = "GOOG" and startDate = "2016-01-01" and endDate = "2017-01-23"&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=
+
+
+
+
