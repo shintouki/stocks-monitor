@@ -25,6 +25,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.14.0",
     "express-session": "^1.15.0",
+    "get-json": "0.0.3",
     "jquery": "^3.1.1",
     "mongoose": "^4.7.7",
     "pug": "^2.0.0-beta6"

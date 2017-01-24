@@ -47,10 +47,10 @@ $(function () {
 
   // $.each(names, function (i, name) {
 
-    $.get('/stock-search', { stockCodes: names }, function(data) {
+    $.get('/stock-search', function(data) {
 
       console.log(data);
-      
+
       // seriesOptions[i] = {
       //   name: name,
       //   data: data
