@@ -1,3 +1,10 @@
+#stocks-container {
+  margin-top: 2em; }
+
+#author-container {
+  margin-top: 2em;
+  margin-bottom: 5em; }
+
 #chart-container {
   height: 400px;
   min-width: 310px; }

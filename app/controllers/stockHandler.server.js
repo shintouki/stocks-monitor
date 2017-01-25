@@ -54,7 +54,6 @@ function StockHandler() {
 
             if (data.quandl_error) {
               // Send error reponse back to server
-              console.log("Error....");
               res.json("Error");
             }
             else {
@@ -106,7 +105,7 @@ function StockHandler() {
           res.json(stockCode + ' successfully removed.');
         }
       })
-      
+
   };
 
   
