@@ -4,11 +4,11 @@ $(function () {
 
   var stockInput = $('#stock-input');
   var addStockButton = $('#add-stock-button');
-
+  var stockList = $('#stocks-list');
 
   var seriesOptions = [];
-  var seriesCounter = 0;
-  var names = ['GOOG', 'YHOO', 'FB', 'AAPL'];
+  // var seriesCounter = 0;
+  // var names = ['GOOG', 'YHOO', 'FB', 'AAPL'];
 
   /**
    * Create the chart when all data is loaded
@@ -26,30 +26,6 @@ $(function () {
     });
   }
 
-  // $.each(names, function (i, name) {
-
-  //   $.get('/stock-search', { stockName: names[i] }, function(data) {
-
-  //     var stockData = data.relevantDataArr;
-  //     // console.log(stockData);
-
-  //     seriesOptions[i] = {
-  //       name: name,
-  //       data: stockData
-  //     };
-
-  //     // As we're loading the data asynchronously, we don't know what order it will arrive. So
-  //     // we keep a counter and create the chart when all the data is loaded.
-  //     seriesCounter += 1;
-  //     // console.log(seriesCounter);
-  //     if (seriesCounter === names.length) {
-  //       console.log("creating chart...");
-  //       createChart();
-  //     }
-  //   });
-
-  // });
-
   // Load stocks and graph them on page load
   $.get('/api/stocks', function(data) {
 
@@ -62,6 +38,24 @@ $(function () {
         name: code,
         data: stockData
       }
+
+      // Create list-group on bottom with stock name & code
+      var $div = $("<div>", {
+        class: "list-group-item"
+      });
+
+      var $h3 = $("<h3>", {
+        text: code
+      });
+
+      var $p = $("<p>", {
+        text: name,
+        class: 'text-muted'
+      });
+
+      $div.append($h3);
+      $div.append($p);
+      stockList.append($div);
     }
 
     createChart();
