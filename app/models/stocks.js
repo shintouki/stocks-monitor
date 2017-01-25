@@ -4,11 +4,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Stock = new Schema({
-  symbol: String,
+  code: String,
   name: String,
-  data: {
+  data: [
     [Number, Number]
-  }
+  ]
 });
 
 module.exports = mongoose.model('Stock', Stock);

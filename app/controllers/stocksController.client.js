@@ -52,29 +52,29 @@ $(function () {
     });
   }
 
-  $.each(names, function (i, name) {
+  // $.each(names, function (i, name) {
 
-    $.get('/stock-search', { stockName: names[i] }, function(data) {
+  //   $.get('/stock-search', { stockName: names[i] }, function(data) {
 
-      var stockData = data.relevantDataArr;
-      // console.log(stockData);
+  //     var stockData = data.relevantDataArr;
+  //     // console.log(stockData);
 
-      seriesOptions[i] = {
-        name: name,
-        data: stockData
-      };
+  //     seriesOptions[i] = {
+  //       name: name,
+  //       data: stockData
+  //     };
 
-      // As we're loading the data asynchronously, we don't know what order it will arrive. So
-      // we keep a counter and create the chart when all the data is loaded.
-      seriesCounter += 1;
-      // console.log(seriesCounter);
-      if (seriesCounter === names.length) {
-        console.log("creating chart...");
-        createChart();
-      }
-    });
+  //     // As we're loading the data asynchronously, we don't know what order it will arrive. So
+  //     // we keep a counter and create the chart when all the data is loaded.
+  //     seriesCounter += 1;
+  //     // console.log(seriesCounter);
+  //     if (seriesCounter === names.length) {
+  //       console.log("creating chart...");
+  //       createChart();
+  //     }
+  //   });
 
-  });
+  // });
 
   // Let user press enter key inside stockInput to trigger addStockButton
   stockInput.keyup(function(event) {
