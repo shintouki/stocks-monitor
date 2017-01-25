@@ -115,7 +115,6 @@ $(function () {
           data: stockData
         });
 
-
       }
 
     });
@@ -134,6 +133,15 @@ $(function () {
       // Delete stock card from page
       currButton.parent().remove();
 
+      // Remove stock from chart
+      if (chart.series.length) {
+        for (var i = 0; i<chart.series.length; i++) {
+          if (chart.series[i].name === currCode) {
+            chart.series[i].remove();
+          }
+        }
+        
+      }
     });
 
   });
