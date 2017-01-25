@@ -64,8 +64,8 @@ function StockHandler() {
   };
 
   this.addStock = function (req, res) {
-    var stockCode = req.body.stockCode;
-    console.log(stockCode);
+    var stockCode = req.body.stockCode.toUpperCase();
+    // console.log(stockCode);
     Stocks
       .findOne( { 'code': stockCode })
       .exec(function(err, doc) {
@@ -99,25 +99,37 @@ function StockHandler() {
             }
             else {
               var name = data.dataset.name;
-              var stockPricesArr = data.dataset.data;
+              var stockData = data.dataset.data;
               var relevantDataArr = [];
               
-              for (var i = stockPricesArr.length - 1; i >= 0; i--) {
-                var indivDate = stockPricesArr[i][0];
+              for (var i = stockData.length - 1; i >= 0; i--) {
+                var indivDate = stockData[i][0];
                 var unixTime = new Date(indivDate).getTime();
-                var endPrice = stockPricesArr[i][4];
+                var endPrice = stockData[i][4];
 
                 relevantDataArr.push([unixTime, endPrice]);
               }
 
-              var resObj = {
-                stockDetails: details,
-                relevantDataArr: relevantDataArr
-              };
-
               // Add stock to database
+              var newStock = new Stocks();
+              newStock.code = stockCode;
+              newStock.name = name;
+              newStock.data = relevantDataArr;
 
-              res.json(resObj);
+              newStock.save(function(err, doc) {
+                if (err) {
+                  res.send(null, 500);
+                }
+
+                res.send(newStock);
+              });
+
+              // var resObj = {
+              //   stockDetails: details,
+              //   relevantDataArr: relevantDataArr
+              // };
+              
+              // res.json(resObj);
             }
             
           });

@@ -85,8 +85,8 @@ $(function () {
 
   addStockButton.click(function() {
     var stockCode = stockInput.val();
-    $.post('/add-stock', { stockCode: stockCode }, function(data) {
-
+    $.post('/api/stocks', { stockCode: stockCode }, function(data) {
+      console.log(data);
 
     });
 
