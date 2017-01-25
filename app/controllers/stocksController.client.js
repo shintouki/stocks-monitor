@@ -7,8 +7,7 @@ $(function () {
   var stockList = $('#stocks-list');
 
   var seriesOptions = [];
-  // var seriesCounter = 0;
-  // var names = ['GOOG', 'YHOO', 'FB', 'AAPL'];
+  var chart;
 
   /**
    * Create the chart when all data is loaded
@@ -16,7 +15,7 @@ $(function () {
    */
   function createChart() {
 
-    Highcharts.stockChart('chart-container', {
+    chart = Highcharts.stockChart('chart-container', {
 
       rangeSelector: {
         selected: 4
@@ -37,6 +36,7 @@ $(function () {
    * @returns {undefined}
    */
   function createStockCard(code, name) {
+
     var $div = $("<div>", {
       class: "list-group-item"
     });
@@ -77,7 +77,6 @@ $(function () {
         data: stockData
       }
 
-      
       createStockCard(code, name);
     }
 
@@ -94,6 +93,7 @@ $(function () {
   });
 
   addStockButton.click(function() {
+    var currentButton = $(this);
     var stockCode = stockInput.val();
     $.post('/api/stocks', { stockCode: stockCode }, function(data) {
       if (data === 'Exists') {
@@ -103,11 +103,19 @@ $(function () {
         alert('Stock code is incorrect or does not exist')
       }
       else {
-        // Add stock card at bottom
         var name = data.name;
         var code = data.code;
+        var stockData = data.data;
 
         createStockCard(code, name);
+
+        // Add stock to chart
+        chart.addSeries({
+          name: code,
+          data: stockData
+        });
+
+
       }
 
     });
