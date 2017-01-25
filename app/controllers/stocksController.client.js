@@ -87,6 +87,12 @@ $(function () {
     var stockCode = stockInput.val();
     $.post('/api/stocks', { stockCode: stockCode }, function(data) {
       console.log(data);
+      if (data === "Exists") {
+        alert('Stock is already in graph');
+      }
+      else {
+        
+      }
 
     });
 

@@ -6,9 +6,7 @@ var Schema = mongoose.Schema;
 var Stock = new Schema({
   code: String,
   name: String,
-  data: [
-    [Number, Number]
-  ]
+  data: [Schema.Types.Mixed]
 });
 
 module.exports = mongoose.model('Stock', Stock);

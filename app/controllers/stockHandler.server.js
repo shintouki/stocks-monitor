@@ -65,6 +65,7 @@ function StockHandler() {
 
   this.addStock = function (req, res) {
     var stockCode = req.body.stockCode.toUpperCase();
+    console.log(stockCode);
     // console.log(stockCode);
     Stocks
       .findOne( { 'code': stockCode })
@@ -88,9 +89,13 @@ function StockHandler() {
           var startDate = year - 1 + '-' + month + '-' + day;
           var endDate = year + '-' + month + '-' + day;
           var apiKey = process.env.QUANDL_API_KEY;
-          var quandlApiUrl = 'https://www.quandl.com/api/v3/datasets/WIKI/' + stockCode + '.json?api_key=' + apiKey + '&start_date=' + startDate + '&end_date=' + endDate;
 
+          var quandlApiUrl = 'https://www.quandl.com/api/v3/datasets/WIKI/' + stockCode + '.json?api_key=' + apiKey + '&start_date=' + startDate + '&end_date=' + endDate;
+          console.log(quandlApiUrl);
+          console.log("right before getjson");
           getJSON(quandlApiUrl, function (err, data) {
+            console.log(err);
+            console.log("inside getjson");
             if (err) {
               // Send error reponse back to server
               console.log(err);
