@@ -22,32 +22,6 @@ $(function () {
         selected: 4
       },
 
-      yAxis: {
-        labels: {
-          formatter: function () {
-            return (this.value > 0 ? ' + ' : '') + this.value + '%';
-          }
-        },
-        plotLines: [{
-          value: 0,
-          width: 2,
-          color: 'silver'
-        }]
-      },
-
-      plotOptions: {
-        series: {
-          compare: 'percent',
-          showInNavigator: true
-        }
-      },
-
-      tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-        valueDecimals: 2,
-        split: true
-      },
-
       series: seriesOptions
     });
   }
@@ -75,6 +49,23 @@ $(function () {
   //   });
 
   // });
+
+  // Load stocks and graph them on page load
+  $.get('/api/stocks', function(data) {
+
+    for (var i = 0; i < data.length; i++) {
+      var name = data[i].name;
+      var code = data[i].code;
+      var stockData = data[i].data;
+
+      seriesOptions[i] = {
+        name: code,
+        data: stockData
+      }
+    }
+
+  });
+
 
   // Let user press enter key inside stockInput to trigger addStockButton
   stockInput.keyup(function(event) {
