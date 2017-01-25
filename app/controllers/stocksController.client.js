@@ -30,12 +30,46 @@ $(function () {
     });
   }
 
+  /**
+   * Create stock card at bottom with stock name & code
+   * @param {string} code - Stock code.
+   * @param {string} name - Stock name.
+   * @returns {undefined}
+   */
+  function createStockCard(code, name) {
+    var $div = $("<div>", {
+      class: "list-group-item"
+    });
+
+    var $code = $("<h3>", {
+      text: code
+    });
+
+    var $name = $("<p>", {
+      text: name,
+      class: 'stock-name'
+    });
+
+    var $deleteButton = $("<button>", {
+      text: 'x',
+      class: 'delete-stock-btn',
+      id: code + '-id',
+      title: 'Delete this stock'
+    });
+
+    $div.append($code);
+
+    $div.append($name);
+    $div.append($deleteButton);
+    stockList.append($div);
+  }
+
   // Load stocks and graph them on page load
   $.get('/api/stocks', function(data) {
 
     for (var i = 0; i < data.length; i++) {
-      var name = data[i].name;
       var code = data[i].code;
+      var name = data[i].name;
       var stockData = data[i].data;
 
       seriesOptions[i] = {
@@ -43,32 +77,8 @@ $(function () {
         data: stockData
       }
 
-      // Create list-group on bottom with stock name & code
-      var $div = $("<div>", {
-        class: "list-group-item"
-      });
-
-      var $code = $("<h3>", {
-        text: code
-      });
-
-      var $name = $("<p>", {
-        text: name,
-        class: 'stock-name'
-      });
-
-      var $deleteButton = $("<button>", {
-        text: 'x',
-        class: 'delete-stock-btn',
-        id: code + '-id',
-        title: 'Delete this stock'
-      });
-
-      $div.append($code);
-
-      $div.append($name);
-      $div.append($deleteButton);
-      stockList.append($div);
+      
+      createStockCard(code, name);
     }
 
     createChart();
@@ -86,7 +96,6 @@ $(function () {
   addStockButton.click(function() {
     var stockCode = stockInput.val();
     $.post('/api/stocks', { stockCode: stockCode }, function(data) {
-      console.log(data);
       if (data === 'Exists') {
         alert('Stock is already in graph');
       }
@@ -94,7 +103,11 @@ $(function () {
         alert('Stock code is incorrect or does not exist')
       }
       else {
+        // Add stock card at bottom
+        var name = data.name;
+        var code = data.code;
 
+        createStockCard(code, name);
       }
 
     });
@@ -108,13 +121,12 @@ $(function () {
     var buttonId = currButton.attr('id');
     var currCode = buttonId.substring(0, buttonId.length - 3);
     
-    // Delete stock card from page
-    currButton.parent().remove();
-
-
     // Delete request to delete stock from DB
+    $.delete('/api/stocks', { stockCode: currCode }, function(data) {
+      // Delete stock card from page
+      currButton.parent().remove();
 
-
+    });
 
   });
 
