@@ -60,6 +60,7 @@ $(function () {
       var $deleteButton = $("<button>", {
         text: 'x',
         class: 'delete-stock-btn',
+        id: code + '-id',
         title: 'Delete this stock'
       });
 
@@ -97,6 +98,22 @@ $(function () {
       }
 
     });
+
+
+  });
+
+  // Click handler for delete stock x buttons
+  stockList.on("click", ".delete-stock-btn", function() {
+    var currButton = $(this);
+    var buttonId = currButton.attr('id');
+    var currCode = buttonId.substring(0, buttonId.length - 3);
+    
+    // Delete stock card from page
+    currButton.parent().remove();
+
+
+    // Delete request to delete stock from DB
+
 
 
   });
