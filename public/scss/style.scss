@@ -3,3 +3,29 @@
   height: 400px;
   min-width: 310px;
 }
+
+.leftDiv {
+  // float: left;
+}
+
+.rightDiv {
+  // float: right;
+}
+
+.stock-name {
+  color: #7e7e7e;
+}
+
+.delete-stock-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: white;
+  font-size: 150%;
+  color: #7e7e7e;
+}
+
+.delete-stock-btn:hover {
+  color: #2a2a2a;
+}

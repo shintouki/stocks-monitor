@@ -21,7 +21,11 @@ $(function () {
       rangeSelector: {
         selected: 4
       },
-
+      
+      credits: {
+        enabled: false
+      },
+      
       series: seriesOptions
     });
   }
@@ -44,17 +48,25 @@ $(function () {
         class: "list-group-item"
       });
 
-      var $h3 = $("<h3>", {
+      var $code = $("<h3>", {
         text: code
       });
 
-      var $p = $("<p>", {
+      var $name = $("<p>", {
         text: name,
-        class: 'text-muted'
+        class: 'stock-name'
       });
 
-      $div.append($h3);
-      $div.append($p);
+      var $deleteButton = $("<button>", {
+        text: 'x',
+        class: 'delete-stock-btn',
+        title: 'Delete this stock'
+      });
+
+      $div.append($code);
+
+      $div.append($name);
+      $div.append($deleteButton);
       stockList.append($div);
     }
 

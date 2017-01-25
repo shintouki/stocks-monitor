@@ -2,4 +2,19 @@
   height: 400px;
   min-width: 310px; }
 
+.stock-name {
+  color: #7e7e7e; }
+
+.delete-stock-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: white;
+  font-size: 150%;
+  color: #7e7e7e; }
+
+.delete-stock-btn:hover {
+  color: #2a2a2a; }
+
 /*# sourceMappingURL=style.css.map */
