@@ -20,8 +20,8 @@ module.exports = function(app) {
   // app.route('/add-stock')
   //   .get(stockHandler.addStock);
 
-  app.route('/stock-search')
-    .get(stockHandler.stockSearch);
+  // app.route('/stock-search')
+  //   .get(stockHandler.stockSearch);
 
   app.route('*')
     .get(function (req, res) {
