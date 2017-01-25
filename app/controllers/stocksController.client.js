@@ -95,6 +95,7 @@ $(function () {
   addStockButton.click(function() {
     var currentButton = $(this);
     var stockCode = stockInput.val();
+    stockInput.val('');
     $.post('/api/stocks', { stockCode: stockCode }, function(data) {
       if (data === 'Exists') {
         alert('Stock is already in graph');
