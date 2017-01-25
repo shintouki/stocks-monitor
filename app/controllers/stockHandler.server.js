@@ -48,7 +48,12 @@ function StockHandler() {
     });
 
 
-  }
+  };
+
+  this.getStocks = function (req, res) {
+
+
+  };
 
   this.addStock = function (req, res) {
     var stockCode = req.body.stockCode;
@@ -59,7 +64,6 @@ function StockHandler() {
     var month = today.getMonth() + 1;
     var day = today.getDate();
 
-    var stockCode = req.query.stockName;
     var startDate = year - 1 + '-' + month + '-' + day;
     var endDate = year + '-' + month + '-' + day;
     var apiKey = process.env.QUANDL_API_KEY
@@ -95,7 +99,12 @@ function StockHandler() {
       
     });
 
-  }
+  };
+
+  this.deleteStock = function (req, res) {
+    
+    
+  };
 
   
 }

@@ -5,8 +5,10 @@ var Schema = mongoose.Schema;
 
 var Stock = new Schema({
   symbol: String,
-  details: String,
-  
+  name: String,
+  data: {
+    [Number, Number]
+  }
 });
 
 module.exports = mongoose.model('Stock', Stock);

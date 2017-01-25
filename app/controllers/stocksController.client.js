@@ -6,9 +6,9 @@ $(function () {
   var addStockButton = $('#add-stock-button');
 
 
-  var seriesOptions = [],
-    seriesCounter = 0,
-    names = ['GOOG', 'YHOO', 'FB', 'AAPL'];
+  var seriesOptions = [];
+  var seriesCounter = 0;
+  var names = ['GOOG', 'YHOO', 'FB', 'AAPL'];
 
   /**
    * Create the chart when all data is loaded
@@ -76,11 +76,17 @@ $(function () {
 
   });
 
+  // Let user press enter key inside stockInput to trigger addStockButton
+  stockInput.keyup(function(event) {
+    if(event.keyCode == 13){
+      addStockButton.click();
+    }
+  });
 
   addStockButton.click(function() {
     var stockCode = stockInput.val();
     $.post('/add-stock', { stockCode: stockCode }, function(data) {
-      
+
 
     });
 
