@@ -2,7 +2,7 @@
 
 $(function () {
   var socket = io();
-
+  
   var stockInput = $('#stock-input');
   var addStockButton = $('#add-stock-button');
   var stockList = $('#stocks-list');
@@ -94,6 +94,7 @@ $(function () {
   });
 
   addStockButton.click(function() {
+
     var currentButton = $(this);
     var stockCode = stockInput.val();
     stockInput.val('');
@@ -105,22 +106,13 @@ $(function () {
         alert('Stock code is incorrect or does not exist')
       }
       else {
-        var name = data.name;
-        var code = data.code;
-        var stockData = data.data;
-
-        createStockCard(code, name);
-
-        // Add stock to chart
-        chart.addSeries({
-          name: code,
-          data: stockData
-        });
+        // Send data to all users
+        socket.emit('add stock', { data: data });
 
       }
 
     });
-
+    
 
   });
 
@@ -146,6 +138,21 @@ $(function () {
       }
     });
 
+  });
+
+  // Add stock to graph for all users
+  socket.on('add stock', function(data) {
+    var name = data.data.name;
+    var code = data.data.code;
+    var stockData = data.data.data;
+
+    createStockCard(code, name);
+
+    // Add stock to chart
+    chart.addSeries({
+      name: code,
+      data: stockData
+    });
   });
 
 });
