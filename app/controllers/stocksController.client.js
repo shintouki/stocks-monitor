@@ -108,7 +108,6 @@ $(function () {
       else {
         // Send data to all users
         socket.emit('add stock', { data: data });
-
       }
 
     });
@@ -118,29 +117,22 @@ $(function () {
 
   // Click handler for delete stock x buttons
   stockList.on("click", ".delete-stock-btn", function() {
-    var currButton = $(this);
-    var buttonId = currButton.attr('id');
+    // var currButton = $(this);
+    var buttonId = $(this).attr('id');
     var currCode = buttonId.substring(0, buttonId.length - 3);
     
     // Delete request to delete stock from DB
     $.delete('/api/stocks', { stockCode: currCode }, function(data) {
-      // Delete stock card from page
-      currButton.parent().remove();
-
-      // Remove stock from chart
-      if (chart.series.length) {
-        for (var i = 0; i<chart.series.length; i++) {
-          if (chart.series[i].name === currCode) {
-            chart.series[i].remove();
-          }
-        }
-        
-      }
+      // Send data to all users
+      socket.emit('delete stock', {
+        buttonId: buttonId,
+        currCode: currCode
+      });
     });
 
   });
 
-  // Add stock to graph for all users
+  // Add stock for all users
   socket.on('add stock', function(data) {
     var name = data.data.name;
     var code = data.data.code;
@@ -153,6 +145,25 @@ $(function () {
       name: code,
       data: stockData
     });
+  });
+
+  // Delete stock for all users
+  socket.on('delete stock', function(data) {
+    console.log(data);
+    var buttonId = data.buttonId;
+    var currCode = data.currCode;
+    
+    // Delete stock card from page
+    $('#' + buttonId).parent().remove();
+
+    // Remove stock from chart
+    if (chart.series.length) {
+      for (var i = 0; i<chart.series.length; i++) {
+        if (chart.series[i].name === currCode) {
+          chart.series[i].remove();
+        }
+      }
+    }
   });
 
 });
