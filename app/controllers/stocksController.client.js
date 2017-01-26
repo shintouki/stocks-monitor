@@ -149,10 +149,9 @@ $(function () {
 
   // Delete stock for all users
   socket.on('delete stock', function(data) {
-    console.log(data);
     var buttonId = data.buttonId;
     var currCode = data.currCode;
-    
+
     // Delete stock card from page
     $('#' + buttonId).parent().remove();
 

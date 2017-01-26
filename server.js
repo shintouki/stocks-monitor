@@ -10,7 +10,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-require('dotenv').load();
+// require('dotenv').load();
 
 mongoose.connect(process.env.MONGO_URI);
 

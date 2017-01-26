@@ -28,12 +28,6 @@ module.exports = function(app, io) {
     .post(stockHandler.addStock)
     .delete(stockHandler.deleteStock);
 
-  // app.route('/add-stock')
-  //   .get(stockHandler.addStock);
-
-  // app.route('/stock-search')
-  //   .get(stockHandler.stockSearch);
-
   app.route('*')
     .get(function (req, res) {
       res.redirect('/');
