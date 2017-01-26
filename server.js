@@ -7,6 +7,8 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 require('dotenv').load();
 
@@ -33,7 +35,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 routes(app);
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
 var port = process.env.PORT || 8080;
-app.listen(port, function () {
+http.listen(port, function () {
   console.log('Node.js listening on port ' + port + '...');
 });

@@ -1,6 +1,7 @@
 'use strict';
 
 $(function () {
+  var socket = io();
 
   var stockInput = $('#stock-input');
   var addStockButton = $('#add-stock-button');
