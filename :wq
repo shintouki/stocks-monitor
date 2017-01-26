@@ -1,7 +1,0 @@
-node_modules/
-.sass-cache/
-.eslintrc*
-.env*
-npm-debug.log
-*.swp
-*.swo
