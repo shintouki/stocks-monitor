@@ -1,5 +1,7 @@
 'use strict';
 
+// Used Highcharts.js to create stock graph
+
 $(function () {
   var socket = io();
   
@@ -132,7 +134,7 @@ $(function () {
 
   });
 
-  // Add stock for all users
+  // Use web sockets to add stock for all users
   socket.on('add stock', function(data) {
     var name = data.data.name;
     var code = data.data.code;
@@ -147,7 +149,7 @@ $(function () {
     });
   });
 
-  // Delete stock for all users
+  // Use web sockets to delete stock for all users
   socket.on('delete stock', function(data) {
     var buttonId = data.buttonId;
     var currCode = data.currCode;

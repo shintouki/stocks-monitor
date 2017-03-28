@@ -7,8 +7,11 @@ var getJSON = require("jsonrequest");
 
 var appUrl = process.env.APP_URL
 
+// I store stocks in DB so page loads faster. It was loading too slowly
+// when I loaded data from stocks api every time page was loaded.
 function StockHandler() {
 
+  // Get stocks from DB and send back in json form
   this.getStocks = function (req, res) {
 
     Stocks
@@ -22,6 +25,7 @@ function StockHandler() {
 
   };
 
+  // Add stock to DB
   this.addStock = function (req, res) {
     var stockCode = req.body.stockCode.toUpperCase();
 
@@ -90,6 +94,7 @@ function StockHandler() {
     
   };
 
+  // Detete stock from DB
   this.deleteStock = function (req, res) {
     
     var stockCode = req.body.stockCode;

@@ -1,5 +1,5 @@
 var appUrl = window.location.origin;
-
+// Function that runs ajax delete and looks like other jquery functions (get, post)
 $.delete = function(url, data, success, dataType) {
  
   if ( $.isFunction(data) ){
